@@ -3,64 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cosas</title>
+<title>DaytClub</title>
 
 <style>
+
+/* FONDO GENERAL */
 body{
 margin:0;
-font-family:Arial;
-background:#0f0f0f;
+font-family:'Segoe UI', Arial;
+background:linear-gradient(135deg,#0f0f0f,#1b1b1b);
 color:white;
 text-align:center;
+overflow-x:hidden;
 }
 
 /* HEADER */
 .header{
-margin-top:80px;
+margin-top:70px;
+animation:fadeIn 1s ease;
 }
 
 .header h1{
-font-size:40px;
+font-size:50px;
 margin-bottom:10px;
+background:linear-gradient(90deg,#b8bdbd,#979ea1);
+-webkit-background-clip:text;
+background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .header p{
 color:#888;
 }
 
-/* GRID (COMO ANTES) */
+/* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-gap:20px;
-padding:40px;
-max-width:800px;
+grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+gap:25px;
+padding:50px;
+max-width:900px;
 margin:auto;
 }
 
 /* CARDS */
 .card{
-background:#1a1a1a;
-border-radius:15px;
-padding:25px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-radius:20px;
+padding:30px;
 cursor:pointer;
-transition:0.25s;
-border:1px solid #2a2a2a;
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.1);
+position:relative;
+overflow:hidden;
+}
+
+/* brillo animado */
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+transition:0.5s;
+}
+
+.card:hover::before{
+left:100%;
 }
 
 .card:hover{
-transform:scale(1.05);
-background:#222;
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 0 25px rgba(0,255,200,0.2);
 }
 
+/* TITULO CARD */
 .card h2{
 margin:0 0 10px;
 font-size:22px;
 }
 
+/* DESCRIPCION */
 .card p{
 color:#aaa;
 font-size:14px;
+}
+
+/* COLORES DISTINTOS */
+.card:nth-child(1):hover{
+box-shadow:0 0 25px #e6de75;
+}
+.card:nth-child(2):hover{
+box-shadow:0 0 25px #ff4d6d;
+}
+.card:nth-child(3):hover{
+box-shadow:0 0 25px #02d7df;
 }
 
 /* GAME VIEW */
@@ -68,34 +108,50 @@ font-size:14px;
 display:none;
 position:fixed;
 inset:0;
-background:#111;
+background:#0d0d0d;
 flex-direction:column;
+animation:fadeIn 0.5s;
 }
 
+/* TOPBAR */
 .topbar{
 padding:15px;
-background:#1a1a1a;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
 }
 
+/* BOTON */
 button{
 padding:10px 20px;
-background:#333;
-color:white;
+background:linear-gradient(90deg,#d6dad9,#909192);
+color:black;
 border:none;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
+font-weight:bold;
+transition:0.25s;
 }
 
 button:hover{
-background:#555;
+transform:scale(1.05);
 }
 
+/* IFRAME */
 iframe{
 flex:1;
 width:100%;
 height:100%;
 border:none;
 }
+
+/* ANIMACION */
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
+}
+
 </style>
 </head>
 
@@ -104,24 +160,24 @@ border:none;
 <!-- MENU -->
 <div id="menu">
     <div class="header">
-        <h1>Cosas</h1>
-        <p></p>
+        <h1>Mini Juegos</h1>
+        <p>Elegí un juego</p>
     </div>
 
     <div class="grid">
+        <div class="card" onclick="openGame('Wh.html')">
+            <h2>🤔 ¿Que preferís?</h2>
+            <p>Preguntas epicardou</p>
+        </div>
+
         <div class="card" onclick="openGame('juego.html')">
-            <h2>Palabra diaria 🇦🇷</h2>
+            <h2>🧠 Adiviná al famoso</h2>
+            <p>El mismo nombre lo dice</p>
+        </div>
+
+        <div class="card" onclick="openGame('juego1.html')">
+            <h2>Proximamente</h2>
             <p></p>
-        </div>
-
-        <div class="card" onclick="openGame('juego2.html')">
-            <h2>Juego 2</h2>
-            <p>Próximamente</p>
-        </div>
-
-        <div class="card" onclick="openGame('juego3.html')">
-            <h2>Juego 3</h2>
-            <p>Próximamente</p>
         </div>
     </div>
 </div>
